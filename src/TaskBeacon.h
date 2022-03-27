@@ -15,7 +15,9 @@ public:
 
   virtual bool setup(System &system) override;
   virtual bool loop(System &system) override;
-  bool         sendBeacon(System &system);
+
+  static String create_lat_aprs(double lat);
+  static String create_long_aprs(double lng);
 
 private:
   TaskQueue<std::shared_ptr<APRSMessage>> &_toModem;
@@ -28,10 +30,11 @@ private:
   TinyGPSPlus    _gps;
   bool           _useGps;
 
-  static uint      _instances;
-  static OneButton _userButton;
-  static bool      _send_update;
-  static void      pushButton();
+  OneButton   _userButton;
+  static bool _send_update;
+
+  bool        sendBeacon(System &system);
+  static void pushButton();
 };
 
 #endif

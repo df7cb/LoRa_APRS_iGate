@@ -7,25 +7,23 @@
 #include "TaskBeacon.h"
 #include "project_configuration.h"
 
+bool BeaconTask::_send_update;
+
 BeaconTask::BeaconTask(TaskQueue<std::shared_ptr<APRSMessage>> &toModem, TaskQueue<std::shared_ptr<APRSMessage>> &toAprsIs) : Task(TASK_BEACON, TaskBeacon), _toModem(toModem), _toAprsIs(toAprsIs), _ss(1), _useGps(false) {
+  _send_update = false;
 }
 
 BeaconTask::~BeaconTask() {
 }
-
-OneButton BeaconTask::_userButton;
-bool      BeaconTask::_send_update;
-uint      BeaconTask::_instances;
 
 void BeaconTask::pushButton() {
   _send_update = true;
 }
 
 bool BeaconTask::setup(System &system) {
-  if (_instances++ == 0 && system.getBoardConfig()->Button > 0) {
+  if (system.getBoardConfig()->Button > 0) {
     _userButton = OneButton(system.getBoardConfig()->Button, true, true);
     _userButton.attachClick(pushButton);
-    _send_update = false;
   }
 
   _useGps = system.getUserConfig()->beacon.use_gps;
@@ -72,7 +70,7 @@ bool BeaconTask::loop(System &system) {
   return true;
 }
 
-String create_lat_aprs(double lat) {
+String BeaconTask::create_lat_aprs(double lat) {
   char str[20];
   char n_s = 'N';
   if (lat < 0) {
@@ -84,7 +82,7 @@ String create_lat_aprs(double lat) {
   return lat_str;
 }
 
-String create_long_aprs(double lng) {
+String BeaconTask::create_long_aprs(double lng) {
   char str[20];
   char e_w = 'E';
   if (lng < 0) {
