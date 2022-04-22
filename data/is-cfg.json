@@ -1,5 +1,5 @@
 {
-	"callsign": "NOCALL-10",
+	"callsign": "DF7CB-10",
 	"network": {
 		"DHCP": true,
 		"static": {
@@ -10,8 +10,8 @@
 			"dns2": "192.168.0.2"
 		},
 		"hostname": {
-			"overwrite": false,
-			"name": "NOCALL-10"
+			"overwrite": true,
+			"name": "df7cb-lora"
 		}
 	},
 	"wifi": {
@@ -24,23 +24,23 @@
 		]
 	},
 	"beacon": {
-		"message": "LoRa iGATE & Digi, Info: github.com/lora-aprs/LoRa_APRS_iGate",
+		"message": "LoRa iGATE, Christoph DF7CB, JO31HI",
 		"position": {
-			"latitude": 0.000000,
-			"longitude": 0.000000
+			"latitude": 51.372396,
+			"longitude": 6.595486
 		},
 		"use_gps": false,
 		"timeout": 15
 	},
 	"aprs_is": {
 		"active": true,
-		"passcode": "",
+		"passcode": "17127",
 		"server": "euro.aprs2.net",
 		"port": 14580
 	},
 	"digi": {
 		"active": false,
-		"beacon": false
+		"beacon": true
 	},
 	"lora": {
 		"frequency_rx": 433775000,
@@ -53,7 +53,7 @@
 		"tx_enable": false
 	},
 	"display": {
-		"always_on": true,
+		"always_on": false,
 		"timeout": 10,
 		"overwrite_pin": 0,
 		"turn180": true
@@ -77,7 +77,7 @@
 	},
 	"syslog": {
 		"active": true,
-		"server": "syslog.lora-aprs.info",
+		"server": "192.168.0.2",
 		"port": 514
 	},
 	"ntp_server": "pool.ntp.org"
